@@ -2,16 +2,16 @@ package com.sdlc.pro.sdlcproerrorhaddlingapp.controller;
 
 import com.sdlc.pro.sdlcproerrorhaddlingapp.annotations.RestControllerIdentifier;
 import com.sdlc.pro.sdlcproerrorhaddlingapp.exeptions.ResourceNotFoundException;
+import com.sdlc.pro.sdlcproerrorhaddlingapp.model.Employee;
 import com.sdlc.pro.sdlcproerrorhaddlingapp.model.ResponseError;
 import com.sdlc.pro.sdlcproerrorhaddlingapp.model.Student;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -23,6 +23,12 @@ import java.util.Optional;
 @RestControllerIdentifier
 @RequestMapping("/api/v1")
 public class StudentController {
+    @PostMapping(value = "/saveEmployee")
+    public Employee saveEmployee(@Valid @RequestBody Employee employee ) {
+        employee.setId(101);
+        return employee;
+    }
+
     private final List<Student> students = new ArrayList<>();
 
     public StudentController() {
