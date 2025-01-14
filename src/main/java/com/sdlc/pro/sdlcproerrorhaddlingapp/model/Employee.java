@@ -1,5 +1,10 @@
 package com.sdlc.pro.sdlcproerrorhaddlingapp.model;
 
+import com.sdlc.pro.sdlcproerrorhaddlingapp.annotations.AbdullahRange;
+import com.sdlc.pro.sdlcproerrorhaddlingapp.annotations.BDPhoneNumber;
+import com.sdlc.pro.sdlcproerrorhaddlingapp.interfaces.Error;
+import com.sdlc.pro.sdlcproerrorhaddlingapp.interfaces.SaveEmployee;
+import com.sdlc.pro.sdlcproerrorhaddlingapp.interfaces.UpdateEmplyee;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -14,15 +19,16 @@ import org.hibernate.validator.constraints.Range;
 public class Employee {
 
 
-    @Positive
+    @Positive(groups = SaveEmployee.class)
     private int id;
-    @NotBlank
+    @AbdullahNotBlank(groups = SaveEmployee.class)
     private String name;
-    @Range(min = 18,max = 50)
+    @AbdullahRange(min = 18,mx = 50,groups = SaveEmployee.class)
     private int age;
-    @Email
+    @Email(groups = SaveEmployee.class)
     private  String email;
-
+//@Pattern(regexp = "(\\+88)?01[3-9]\\d{8}",message = "invalid bangladeshi Phone number")
+    @BDPhoneNumber(groups = SaveEmployee.class,payload = Error.class)
     private  String phone;
   @Valid
   private  Address address;

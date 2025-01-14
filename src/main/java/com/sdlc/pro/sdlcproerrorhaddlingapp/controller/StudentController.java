@@ -2,6 +2,8 @@ package com.sdlc.pro.sdlcproerrorhaddlingapp.controller;
 
 import com.sdlc.pro.sdlcproerrorhaddlingapp.annotations.RestControllerIdentifier;
 import com.sdlc.pro.sdlcproerrorhaddlingapp.exeptions.ResourceNotFoundException;
+import com.sdlc.pro.sdlcproerrorhaddlingapp.interfaces.SaveEmployee;
+import com.sdlc.pro.sdlcproerrorhaddlingapp.interfaces.UpdateEmplyee;
 import com.sdlc.pro.sdlcproerrorhaddlingapp.model.Employee;
 import com.sdlc.pro.sdlcproerrorhaddlingapp.model.ResponseError;
 import com.sdlc.pro.sdlcproerrorhaddlingapp.model.Student;
@@ -11,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
@@ -24,7 +27,12 @@ import java.util.Optional;
 @RequestMapping("/api/v1")
 public class StudentController {
     @PostMapping(value = "/saveEmployee")
-    public Employee saveEmployee(@Valid @RequestBody Employee employee ) {
+    public Employee saveEmployee(@Validated(SaveEmployee.class)  @RequestBody Employee employee ) {
+        employee.setId(101);
+        return employee;
+    }
+    @PostMapping(value = "/updateEmployee")
+    public Employee updateEmployee(@Validated(UpdateEmplyee.class) @RequestBody Employee employee ) {
         employee.setId(101);
         return employee;
     }
